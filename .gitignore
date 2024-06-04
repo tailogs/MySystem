@@ -50,7 +50,6 @@ CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 CTestTestfile.cmake
-Makefile
 
 # Каталоги для сборки
 build/
