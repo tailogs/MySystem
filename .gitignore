@@ -1,21 +1,81 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
+# Бинарные файлы
 *.exe
-*.exe~
-*.dll
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Библиотеки
+*.lib
+*.a
+*.la
+*.lo
+*.def
+*.exp
+
+# Объектные файлы
+*.o
+*.obj
 *.so
+*.dll
 *.dylib
 
-# Test binary, built with `go test -c`
-*.test
+# Пакеты
+*.tar.gz
+*.zip
+*.7z
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# IDE и редакторы
+# VS Code
+.vscode/
+.vscode/*
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Sublime Text
+*.sublime-workspace
 
-# Go workspace file
-go.work
+# CLion
+.idea/
+cmake-build-*/
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+Debug/
+Release/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+
+# Каталоги для сборки
+build/
+bin/
+obj/
+out/
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.swp
+*.bak
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Кэшированные файлы
+.cache/
+*.pyc
+*.pyo
+*.pyd
+
+# Системные файлы
+$RECYCLE.BIN/

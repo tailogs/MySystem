@@ -1,0 +1,2 @@
+PUSH "Hello, world!"
+PRINT_STRING
