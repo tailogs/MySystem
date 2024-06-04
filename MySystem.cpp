@@ -1,12 +1,12 @@
 #include <iostream>
-#include <cstdlib>
-#include <string>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <map>
-#include <sstream>
 #include <functional>
+#include <algorithm>
+#include <cctype>
 #include <iomanip>
-#include <fstream>
 #include "ConsoleColor.h"
 
 // Виртуальная машина
@@ -31,7 +31,9 @@ public:
                     stack.pop_back();
                     std::cout << static_cast<char>(value);
                 } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
                     std::cerr << "Error: Stack is empty" << std::endl;
+                    ConsoleColor::ResetColor();
                 }
             } else if (instruction == "PRINT_STRING") {
                 printString();
@@ -41,15 +43,21 @@ public:
                     int b = stack.back(); stack.pop_back();
                     int result = a + b;
                     stack.push_back(result);
+                    ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
                     std::cout << "Result of addition: " << result << std::endl;
+                    ConsoleColor::ResetColor();
                 } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
                     std::cerr << "Error: Not enough values on the stack" << std::endl;
+                    ConsoleColor::ResetColor();
                 }
             } else if (instruction == "PRINT") {
                 if (!stack.empty()) {
                     std::cout << stack.back();
                 } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
                     std::cerr << "Error: Stack is empty" << std::endl;
+                    ConsoleColor::ResetColor();
                 }
             } else if (instruction == "MULT") {
                 if (stack.size() >= 2) {
@@ -57,12 +65,18 @@ public:
                     int b = stack.back(); stack.pop_back();
                     int result = a * b;
                     stack.push_back(result);
+                    ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
                     std::cout << "Result of multiplication: " << result << std::endl;
+                    ConsoleColor::ResetColor();
                 } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
                     std::cerr << "Error: Not enough values on the stack" << std::endl;
+                    ConsoleColor::ResetColor();
                 }
             } else {
+                ConsoleColor::SetTextColor(ConsoleColor::RED);
                 std::cerr << "Unknown instruction: " << instruction << std::endl;
+                ConsoleColor::ResetColor();
             }
         }
         std::cout << std::endl;
@@ -132,7 +146,52 @@ public:
 
 private:
     void help() {
-        // ... (код не изменился)
+        std::cout << "Available commands:" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    help   - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Show this help message" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    run    - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Run a virtual machine program from a file" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    clear  - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Clear the screen" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    exit   - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Exit the system" << std::endl;
+        ConsoleColor::ResetColor();
+
+        std::cout << std::endl;
+        std::cout << "Virtual Machine Instructions:" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    PUSH <value>   - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Push a value (number or string in double quotes) onto the stack" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    POP            - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Pop and print the top value from the stack as a character" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    PRINT_STRING   - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Print the string stored in the stack" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    ADD            - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Add the top two values on the stack and push the result" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    PRINT          - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Print the top value on the stack" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    MULT           - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Multiply the top two values on the stack and push the result" << std::endl;
+        ConsoleColor::ResetColor();
     }
 
     void run(const std::string& filename) {
@@ -143,7 +202,9 @@ private:
             file.close();
             vm.execute(buffer.str());
         } else {
+            ConsoleColor::SetTextColor(ConsoleColor::RED);
             std::cerr << "Error: Unable to open file " << filename << std::endl;
+            ConsoleColor::ResetColor();
         }
     }
 
