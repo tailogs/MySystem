@@ -37,20 +37,6 @@ public:
                 }
             } else if (instruction == "PRINT_STRING") {
                 printString();
-            } else if (instruction == "ADD") {
-                if (stack.size() >= 2) {
-                    int a = stack.back(); stack.pop_back();
-                    int b = stack.back(); stack.pop_back();
-                    int result = a + b;
-                    stack.push_back(result);
-                    ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
-                    std::cout << "Result of addition: " << result << std::endl;
-                    ConsoleColor::ResetColor();
-                } else {
-                    ConsoleColor::SetTextColor(ConsoleColor::RED);
-                    std::cerr << "Error: Not enough values on the stack" << std::endl;
-                    ConsoleColor::ResetColor();
-                }
             } else if (instruction == "PRINT") {
                 if (!stack.empty()) {
                     std::cout << stack.back();
@@ -59,14 +45,56 @@ public:
                     std::cerr << "Error: Stack is empty" << std::endl;
                     ConsoleColor::ResetColor();
                 }
-            } else if (instruction == "MULT") {
+            } else if (instruction == "ADD") {
+                if (stack.size() >= 2) {
+                    int a = stack.back(); stack.pop_back();
+                    int b = stack.back(); stack.pop_back();
+                    int result = a + b;
+                    stack.push_back(result);
+                    ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+                    std::cout << "Result of addition: (" << a << " + " << b << ") = " << result << std::endl;
+                    ConsoleColor::ResetColor();
+                } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
+                    std::cerr << "Error: Not enough values on the stack" << std::endl;
+                    ConsoleColor::ResetColor();
+                }
+            } else if (instruction == "SUB") {
+                if (stack.size() >= 2) {
+                    int a = stack.back(); stack.pop_back();
+                    int b = stack.back(); stack.pop_back();
+                    int result = a - b;
+                    stack.push_back(result);
+                    ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+                    std::cout << "Result of subtraction: (" << a << " - " << b << ") = " << result << std::endl;
+                    ConsoleColor::ResetColor();
+                } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
+                    std::cerr << "Error: Not enough values on the stack" << std::endl;
+                    ConsoleColor::ResetColor();
+                }
+            } else if (instruction == "MUL") {
                 if (stack.size() >= 2) {
                     int a = stack.back(); stack.pop_back();
                     int b = stack.back(); stack.pop_back();
                     int result = a * b;
                     stack.push_back(result);
                     ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
-                    std::cout << "Result of multiplication: " << result << std::endl;
+                    std::cout << "Result of multiplication: (" << a << " * " << b << ") = " << result << std::endl;
+                    ConsoleColor::ResetColor();
+                } else {
+                    ConsoleColor::SetTextColor(ConsoleColor::RED);
+                    std::cerr << "Error: Not enough values on the stack" << std::endl;
+                    ConsoleColor::ResetColor();
+                }
+            } else if (instruction == "DIV") {
+                if (stack.size() >= 2) {
+                    int a = stack.back(); stack.pop_back();
+                    int b = stack.back(); stack.pop_back();
+                    int result = a - b;
+                    stack.push_back(result);
+                    ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+                    std::cout << "Result of division: (" << a << " / " << b << ") = " << result << std::endl;
                     ConsoleColor::ResetColor();
                 } else {
                     ConsoleColor::SetTextColor(ConsoleColor::RED);
@@ -180,17 +208,25 @@ private:
         ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
         std::cout << "Print the string stored in the stack" << std::endl;
         ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
-        std::cout << "    ADD            - ";
-        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
-        std::cout << "Add the top two values on the stack and push the result" << std::endl;
-        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
         std::cout << "    PRINT          - ";
         ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
         std::cout << "Print the top value on the stack" << std::endl;
         ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
-        std::cout << "    MULT           - ";
+        std::cout << "    ADD            - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Add the top two values on the stack and push the result" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    SUB            - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Sub the top two values on the stack and push the result" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    MUL            - ";
         ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
         std::cout << "Multiply the top two values on the stack and push the result" << std::endl;
+        ConsoleColor::SetTextColor(ConsoleColor::LIGHT_CYAN);
+        std::cout << "    DIV            - ";
+        ConsoleColor::SetTextColor(ConsoleColor::YELLOW);
+        std::cout << "Devision the top two values on the stack and push the result" << std::endl;
         ConsoleColor::ResetColor();
     }
 
